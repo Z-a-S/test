@@ -1,0 +1,163 @@
+/* custom properties use a root selector */
+/* for this we basing off the style-guide */
+:root {
+    --clr-primary-400:hsl(158, 36%, 37%);
+    --clr-secondary-200:hsl(30, 38%, 92%);
+
+    --clr-neutral-900:hsl(212, 21%, 14%);
+    --clr-neutral-400:hsl(228, 12%, 48%);
+    --clr-neutral-100:hsl(0, 0%, 100%);
+    
+    --ff-accent: 'Fraunces', serif;
+    --ff-base: 'Montserrat', sans-serif;
+
+    --fw-regular: 500;
+    --fw-bold: 700;
+}
+
+
+/* we generally want to start stlying with a reset */
+/* josh comeau reset */
+/*
+  1. Use a more-intuitive box-sizing model.
+*/
+*, *::before, *::after {
+    box-sizing: border-box;
+  }
+  /*
+    2. Remove default margin
+  */
+  * {
+    margin: 0;
+  }
+  /*
+    3. Allow percentage-based heights in the application
+  */
+  html, body {
+    height: 100%;
+  }
+  /*
+    Typographic tweaks!
+    4. Add accessible line-height
+    5. Improve text rendering
+  */
+  body {
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  /*
+    6. Improve media defaults
+  */
+  img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+  }
+  /*
+    7. Remove built-in form typography styles
+  */
+  input, button, textarea, select {
+    font: inherit;
+  }
+  /*
+    8. Avoid text overflows
+  */
+  p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+  }
+  /*
+    9. Create a root stacking context
+  */
+  #root, #__next {
+    isolation: isolate;
+  }
+
+
+  /* general styling */
+  body{
+    /* general font styling first */
+    font-family: var(--ff-base);
+    font-weight: var(--fw-regular);
+    /* we generaly want to use rem for body font size */
+    font-size: 0.875rem;
+    color: var(--clr-neutral-400);
+    background-color: var(--clr-secondary-200);
+
+    /* for this project only since min-height body is 100 from reset*/
+    display: grid;
+    /* if you try to center and it doesnt work you can try min-height: 100mvh */
+    place-content: center;
+    /* want some spacing around which we removed */
+    margin: 1rem;
+  }
+
+
+  /* utilities */
+  .flex-group {
+    display: flex;
+    gap: 1rem;
+    /* this is just in case the dom is narrow it looks better */
+    flex-wrap: wrap;
+    /* since left bigger right was aligned to top */
+    align-items: center;
+  }
+
+  /* to hite from screen but good for screen reader */
+  .visually-hidden:not(:focus):not(:active) {
+    clip: rect(0 0 0 0); 
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap; 
+    width: 1px;
+  }
+
+  /* product styles */
+  .product {
+    /* we want product class to control alot so use lookely-scoped custom property which is not globally available*/
+    /* we do this so in case we change in future it will branch from main element */
+    --content-padding: 1.5rem;
+    --content-spacing: 1rem;
+
+    background-color: var(--clr-neutral-100);
+    border-radius: 0.5rem;
+    /* image and button corners overflowing around this radius so hide but cuts button works on image*/
+    overflow: hidden;
+  }
+
+  .product__content {
+    border: 3px solid red;
+    display: grid;
+    /* if we have grid we need gap */
+    gap: var(--content-spacing);
+    padding: var(--content-padding);
+  }
+
+  /* we see button in product img strecth across bottom so look at grid layout */
+
+  .product__category {
+    font-size: 0.8125rem;
+    letter-spacing: 5px;
+    /* good trick to uppercase */
+    text-transform: uppercase;
+  }
+
+  .product__title {
+    font-size: 2rem;
+    font-family: var(--ff-accent);
+    color: var(--clr-neutral-900);
+  }
+
+  /* want a smaller lineheight then reset body lineheight of 1.7 */
+
+  h1,h2,h3 {
+    line-height: 1;
+  }
+
+  .product__price {
+    font-size: 2rem;
+    font-family: var(--ff-accent);
+    color: var(--clr-primary-400);
+  }
+
+  /* we see setting same properties for title and price we can use helper class but not advanced enough */
