@@ -32,6 +32,7 @@
       <!-- good practice to use picture tag -->
       <!-- using BEM naming convention so two __ -->
       <picture class="product__img">
+        <source  srcset="images/image-product-desktop.jpg" media="(min-width: 600px)">
         <img src="images/image-product-mobile.jpg" alt="image-product-mobile">
       </picture>
 
@@ -58,8 +59,9 @@
             <s>$169.99</s>
           </p>
         </div>
-  
-        <button class="button">Add to Cart</button>
+        
+        <!-- since button has shopping cart icon we use data-icon -->
+        <button class="button" data-icon="shopping-cart">Add to Cart</button>
       </div>
 
     </article>
