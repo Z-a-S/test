@@ -2,6 +2,7 @@
 /* for this we basing off the style-guide */
 :root {
     --clr-primary-400:hsl(158, 36%, 37%);
+    --clr-primary-500:hsl(158, 36%, 20%);
     --clr-secondary-200:hsl(30, 38%, 92%);
 
     --clr-neutral-900:hsl(212, 21%, 14%);
@@ -101,7 +102,7 @@
     align-items: center;
   }
 
-  /* to hite from screen but good for screen reader */
+  /* to hide from screen but good for screen reader */
   .visually-hidden:not(:focus):not(:active) {
     clip: rect(0 0 0 0); 
     clip-path: inset(50%);
@@ -123,10 +124,22 @@
     border-radius: 0.5rem;
     /* image and button corners overflowing around this radius so hide but cuts button works on image*/
     overflow: hidden;
+
+    /* we want to make two columns at certain screen width so media quieres and grid */
+    display: grid;
+
+    max-width: 600px;
+  }
+
+  @media (min-width: 600px) {
+    .product {
+      --content-padding: 2rem;
+      grid-template-columns: 1fr 1fr;
+    }
   }
 
   .product__content {
-    border: 3px solid red;
+    /* border: 3px solid red; */
     display: grid;
     /* if we have grid we need gap */
     gap: var(--content-spacing);
@@ -161,3 +174,39 @@
   }
 
   /* we see setting same properties for title and price we can use helper class but not advanced enough */
+
+  /* button */
+  .button {
+    cursor: pointer;
+    text-decoration: none;
+    border: 0;
+    border-radius: 0.5rem;
+    background-color: var(--clr-primary-400);
+    color: var(--clr-neutral-100);
+
+    font-size: 0.925rem;
+    font-weight: var(--fw-bold);
+
+    /* since we know will have image next to it */
+    display: inline-flex;
+    gap: 0.75rem;
+    /* this move text to the left so need to center */
+    justify-content: center;
+    align-items: center;
+
+    padding: 0.5em 1.5em;
+  }
+
+  /* if you do not include blank content then pseduo element will not render */
+  .button[data-icon="shopping-cart"]::before {
+    content: "";
+    background-image: url("images/icon-cart.svg");
+    width: 15px;
+    height: 16px;
+    /* background: red; */
+  }
+
+  /* is comes with specificity and groups */
+  .button:is(:hover, :focus) {
+    background-color: var(--clr-primary-500);
+  }
